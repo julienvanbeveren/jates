@@ -31,7 +31,6 @@ export default class Jate extends Date {
                 }
             }
         }
-        console.log(tokens)
 
         let formattedDate = ''
         for (const token of tokens) {
@@ -84,9 +83,3 @@ export default class Jate extends Date {
     }
 
 }
-
-let myDate = new Jate()
-myDate.format('Mo')
-
-
-
