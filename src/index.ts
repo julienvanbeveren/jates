@@ -13,6 +13,13 @@ export default class Jate extends Date {
         return type == 'short' ? this.daysShort[this.getDay()] : this.days[this.getDay()]
     }
 
+    getDayOfYear() {
+        const start = new Jate(this.getFullYear(), 0, 0).getTime()
+        const diff = (this.getTime()) - start
+        const oneDay = 1000 * 60 * 60 * 24;
+        return Math.floor(diff / oneDay);
+    }
+
     format(formatter: string) {
         let tokens = []
         let nextToken = ''
@@ -40,20 +47,30 @@ export default class Jate extends Date {
             }
             switch (token) {
                 // Month formatting
-                case 'MMMMM':
-                    formattedDate += this.months[this.getMonth()][0]; break
-                case 'MMMM':
-                    formattedDate += this.months[this.getMonth()]; break
-                case 'MMM':
-                    formattedDate += this.monthsShort[this.getMonth()]; break
-                case 'MM':
-                    formattedDate += this.#formatNumber(this.getMonthNumber()); break
-                case 'M': 
-                    formattedDate += this.getMonthNumber().toString(); break
-                case 'Mo':
-                    formattedDate += this.#getOrdinalNumber(this.getMonthNumber()); break
+                case 'MMMMM': formattedDate += this.months[this.getMonth()][0]; break
+                case 'MMMM': formattedDate += this.months[this.getMonth()]; break
+                case 'MMM': formattedDate += this.monthsShort[this.getMonth()]; break
+                case 'MM': formattedDate += this.#formatNumber(this.getMonthNumber()); break
+                case 'M':  formattedDate += this.getMonthNumber().toString(); break
+                case 'Mo': formattedDate += this.#getOrdinalNumber(this.getMonthNumber()); break
+                // Day formatting
+                case 'dd': formattedDate += this.#formatNumber(this.getDate()); break
+                case 'do': formattedDate += this.#getOrdinalNumber(this.getDate()); break
+                case 'd': formattedDate += this.getDate(); break
+                case 'DDD': formattedDate += this.#formatNumber(this.getDayOfYear(), 3); break
+                case 'DD': formattedDate += this.#formatNumber(this.getDayOfYear(), 2); break
+                case 'Do': formattedDate += this.#getOrdinalNumber(this.getDayOfYear()); break
+                case 'D': formattedDate += this.#formatNumber(this.getDayOfYear(), 1); break
+                case 'EEEEEE': formattedDate += this.days[this.getDay() - 1].substring(0, 2); break
+                case 'EEEEE': formattedDate += this.days[this.getDay() - 1].substring(0, 1); break
+                case 'EEEE': formattedDate += this.days[this.getDay() - 1]; break
+                case 'EEE':
+                case 'EE':
+                case 'E': formattedDate += this.days[this.getDay() - 1].substring(0, 3); break
             }
         }
+
+        return formattedDate
     }
 
     #getNextMonthNumber() {
@@ -64,9 +81,9 @@ export default class Jate extends Date {
         return this.getMonth() + 1 > 12 ? 1 : this.getMonth() + 1
     }
 
-    #formatNumber(number: number) {
+    #formatNumber(number: number, digits: number = 2) {
         const numberString = number.toString()
-        return numberString.length > 1 ? numberString : '0' + numberString
+        return numberString.length > digits - 1 ? numberString : '0'.repeat(digits - numberString.length) + numberString
     }
 
     #getOrdinalNumber(number: number) {
