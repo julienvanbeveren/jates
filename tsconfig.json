@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+      "lib": [
+        "dom",
+        "es6",
+        "esnext"
+      ],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "esnext",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noImplicitAny": true,
+      "target": "es2018",                          
+      "moduleResolution": "node",                     
+      "noEmitOnError": true,
+      "declaration": true,
+      "outDir": "./dist",
+      "rootDir": "./src"
+    },
+    "include": [
+      "./src/**/*.ts*"
+    ],
+    "exclude": [
+      "node_modules",
+      "dist"
+    ]
+}
