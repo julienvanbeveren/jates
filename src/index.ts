@@ -67,6 +67,19 @@ export default class Jate extends Date {
                 case 'EEE':
                 case 'EE':
                 case 'E': formattedDate += this.days[this.getDay() - 1].substring(0, 3); break
+                // Quarter formatting
+                case 'qqqqq':
+                case 'QQQQQ': formattedDate += this.getQuarter(); break
+                case 'qqqq':
+                case 'QQQQ': formattedDate += this.#getOrdinalNumber(this.getQuarter()) + 'quarter'; break
+                case 'qqq':
+                case 'QQQ': formattedDate += 'Q' + this.getQuarter(); break
+                case 'qq':
+                case 'QQ': formattedDate += this.#formatNumber(this.getQuarter(), 5); break
+                case 'qo':
+                case 'Qo': formattedDate += this.#getOrdinalNumber(this.getQuarter()); break
+                case 'q':
+                case 'Q': formattedDate += this.getQuarter();
             }
         }
 
@@ -99,4 +112,12 @@ export default class Jate extends Date {
         if (number % 10 == 0) { return number.toString() + 'th' }
     }
 
+    getQuarter() {
+        return Math.ceil(this.getMonthNumber() / 4)
+    }
+
 }
+
+
+let myDate = new Jate()
+console.log(myDate.format('QQ'))
