@@ -25,6 +25,21 @@ export default class Jate extends Date {
         let nextToken = ''
         for (let i = 0; i < formatter.length; i++) {
             if (formatter[i].match(/\W/)) {
+                if (['{', '}'].includes(formatter[i])) {
+                    if (formatter[i] == '{') {
+                        if (nextToken) {
+                            tokens.push(nextToken)
+                        }
+                        nextToken = '{'
+                        continue
+                    }
+                    if (formatter[i] == '}') {
+                        nextToken += '}'
+                        tokens.push(nextToken)
+                        nextToken = ''
+                        continue
+                    }
+                }
                 if (nextToken) {
                     tokens.push(nextToken)
                     nextToken = ''
@@ -41,6 +56,10 @@ export default class Jate extends Date {
 
         let formattedDate = ''
         for (const token of tokens) {
+            if (token.includes('{') && token.includes('}')) {
+                formattedDate += token.replace('{', '').replace('}', '')
+                continue
+            }
             if (token.match(/\W/)) {
                 formattedDate += token
                 continue
