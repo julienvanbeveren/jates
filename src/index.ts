@@ -65,6 +65,19 @@ export default class Jate extends Date {
                 continue
             }
             switch (token) {
+                // Year formatting
+                case 'yyyy': formattedDate += this.#formatNumber(this.getFullYear(), 4); break
+                case 'yyy': formattedDate += this.#formatNumber(this.getFullYear(), 3); break
+                case 'yy': formattedDate += this.#formatNumber(this.getFullYear(), 2); break
+                case 'yo': formattedDate += this.#getOrdinalNumber(this.getFullYear()); break
+                case 'y': formattedDate += this.getFullYear(); break
+                // Quarter formatting
+                case 'qqqqq': case 'QQQQQ': formattedDate += this.getQuarter(); break
+                case 'qqqq': case 'QQQQ': formattedDate += this.#getOrdinalNumber(this.getQuarter()) + 'quarter'; break
+                case 'qqq': case 'QQQ': formattedDate += 'Q' + this.getQuarter(); break
+                case 'qq': case 'QQ': formattedDate += this.#formatNumber(this.getQuarter(), 5); break
+                case 'qo': case 'Qo': formattedDate += this.#getOrdinalNumber(this.getQuarter()); break
+                case 'q': case 'Q': formattedDate += this.getQuarter(); break
                 // Month formatting
                 case 'LLLLL': case 'MMMMM': formattedDate += this.months[this.getMonth()][0]; break
                 case 'LLLL': case 'MMMM': formattedDate += this.months[this.getMonth()]; break
@@ -84,13 +97,6 @@ export default class Jate extends Date {
                 case 'EEEEE': formattedDate += this.days[this.getDay() - 1].substring(0, 1); break
                 case 'EEEE': formattedDate += this.days[this.getDay() - 1]; break
                 case 'EEE': case 'EE': case 'E': formattedDate += this.days[this.getDay() - 1].substring(0, 3); break
-                // Quarter formatting
-                case 'qqqqq': case 'QQQQQ': formattedDate += this.getQuarter(); break
-                case 'qqqq': case 'QQQQ': formattedDate += this.#getOrdinalNumber(this.getQuarter()) + 'quarter'; break
-                case 'qqq': case 'QQQ': formattedDate += 'Q' + this.getQuarter(); break
-                case 'qq': case 'QQ': formattedDate += this.#formatNumber(this.getQuarter(), 5); break
-                case 'qo': case 'Qo': formattedDate += this.#getOrdinalNumber(this.getQuarter()); break
-                case 'q': case 'Q': formattedDate += this.getQuarter(); break
                 // AM - PM
                 case 'aaaaa': formattedDate += this.#getMeridiem().charAt(0); break
                 case 'aaaa': formattedDate += this.#getMeridiem().split('').join(','); break
