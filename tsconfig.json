@@ -20,6 +20,8 @@
       "moduleResolution": "node",                     
       "noEmitOnError": true,
       "declaration": true,
+      "declarationDir": "./dist",
+      "emitDeclarationOnly": true,
       "outDir": "./dist",
       "rootDir": "./src"
     },
