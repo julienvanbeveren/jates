@@ -102,6 +102,17 @@ export default class Jate extends Date {
                 case 'aaaa': formattedDate += this.#getMeridiem().split('').join(','); break
                 case 'aaa': formattedDate += this.#getMeridiem(); break
                 case 'aa': case 'a': formattedDate += this.#getMeridiem().toUpperCase(); break
+                // Hour formatting
+                case 'hh': formattedDate += this.#formatNumber(this.#getHour(this.getHours(), 1, 12)); break
+                case 'ho': formattedDate += this.#getOrdinalNumber(this.#getHour(this.getHours(), 1, 12)); break
+                case 'h': formattedDate += this.#getHour(this.getHours(), 1, 12); break
+                case 'HH': formattedDate += this.#formatNumber(this.#getHour(this.getHours(), 0, 23)); break
+                case 'Ho': formattedDate += this.#getOrdinalNumber(this.#getHour(this.getHours(), 0, 23)); break
+                case 'H': formattedDate += this.#getHour(this.getHours(), 0, 23); break
+                case 'kk': formattedDate += this.#formatNumber(this.#getHour(this.getHours(), 1, 24)); break
+                case 'ko': formattedDate += this.#getOrdinalNumber(this.#getHour(this.getHours(), 1, 24)); break
+                case 'k': formattedDate += this.#getHour(this.getHours(), 1, 24); break
+
             }
         }
 
@@ -145,4 +156,18 @@ export default class Jate extends Date {
         else { return 'pm' }
     }
 
+    #getHour(hour: number, min: number, max: number) {
+        if (hour > max) {
+            return min + (hour - max - 1)
+        }
+        if (hour < min) {
+            return min
+        }
+        return hour
+    }
+
 }
+
+const myDate = new Jate()
+// myDate.setHours(0,0,0,0)
+console.log(myDate.format('Ho'))
