@@ -1,5 +1,15 @@
 export default class Jate extends Date {
 
+    static defaultFormat: string = ''
+    static namedFormat: any = {}
+
+    static setFormat(name: string, format: string) {
+        Jate.namedFormat[name] = format
+    }
+    static removeFormat(name: string) {
+        delete Jate.namedFormat?.[name]
+    }
+
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -20,7 +30,12 @@ export default class Jate extends Date {
         return Math.floor(diff / oneDay);
     }
 
-    format(formatter: string) {
+    nformat(name: string) {
+        console.log(name)
+        console.log(Jate.namedFormat?.[name] || '')
+        return this.format(Jate.namedFormat?.[name] || '')
+    }
+    format(formatter: string = Jate.defaultFormat) {
         let tokens = []
         let nextToken = ''
         for (let i = 0; i < formatter.length; i++) {
@@ -112,6 +127,14 @@ export default class Jate extends Date {
                 case 'kk': formattedDate += this.#formatNumber(this.#getHour(this.getHours(), 1, 24)); break
                 case 'ko': formattedDate += this.#getOrdinalNumber(this.#getHour(this.getHours(), 1, 24)); break
                 case 'k': formattedDate += this.#getHour(this.getHours(), 1, 24); break
+                // Minute formatting
+                case 'mm': formattedDate += this.#formatNumber(this.getMinutes()); break
+                case 'mo': formattedDate += this.#getOrdinalNumber(this.getMinutes()); break
+                case 'm': formattedDate += this.getMinutes(); break
+                // Second formatting
+                case 'ss': formattedDate += this.#formatNumber(this.getSeconds()); break
+                case 'so': formattedDate += this.#getOrdinalNumber(this.getSeconds()); break
+                case 's': formattedDate += this.getSeconds(); break
 
             }
         }
@@ -167,7 +190,3 @@ export default class Jate extends Date {
     }
 
 }
-
-const myDate = new Jate()
-// myDate.setHours(0,0,0,0)
-console.log(myDate.format('Ho'))
