@@ -135,7 +135,10 @@ export default class Jate extends Date {
                 case 'ss': formattedDate += this.#formatNumber(this.getSeconds()); break
                 case 'so': formattedDate += this.#getOrdinalNumber(this.getSeconds()); break
                 case 's': formattedDate += this.getSeconds(); break
-
+                // Milliseconds
+                case 'SSS': formattedDate += this.#formatNumber(this.getMilliseconds(), 3); break
+                case 'SS': formattedDate += this.#formatNumber(this.getMilliseconds()); break
+                case 'S': formattedDate += this.getMilliseconds(); break
             }
         }
 
