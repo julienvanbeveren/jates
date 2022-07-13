@@ -10,17 +10,17 @@ export default class Jate extends Date {
         delete Jate.namedFormat?.[name]
     }
 
-    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-    days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    daysShort = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    private static months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    private static monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+    private static days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    private static daysShort = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
     getMonthName(type: 'long' | 'short' = 'long') {
-        return type == 'short' ? this.monthsShort[this.getMonth()] : this.months[this.getMonth()]
+        return type == 'short' ? Jate.monthsShort[this.getMonth()] : Jate.months[this.getMonth()]
     }
 
     getDayName(type: 'long' | 'short' = 'long') {
-        return type == 'short' ? this.daysShort[this.getDay()] : this.days[this.getDay()]
+        return type == 'short' ? Jate.daysShort[this.getDay()] : Jate.days[this.getDay()]
     }
 
     getDayOfYear() {
@@ -31,10 +31,9 @@ export default class Jate extends Date {
     }
 
     nformat(name: string) {
-        console.log(name)
-        console.log(Jate.namedFormat?.[name] || '')
         return this.format(Jate.namedFormat?.[name] || '')
     }
+
     format(formatter: string = Jate.defaultFormat) {
         let tokens = []
         let nextToken = ''
@@ -94,9 +93,9 @@ export default class Jate extends Date {
                 case 'qo': case 'Qo': formattedDate += this.#getOrdinalNumber(this.getQuarter()); break
                 case 'q': case 'Q': formattedDate += this.getQuarter(); break
                 // Month formatting
-                case 'LLLLL': case 'MMMMM': formattedDate += this.months[this.getMonth()][0]; break
-                case 'LLLL': case 'MMMM': formattedDate += this.months[this.getMonth()]; break
-                case 'LLL': case 'MMM': formattedDate += this.monthsShort[this.getMonth()]; break
+                case 'LLLLL': case 'MMMMM': formattedDate += Jate.months[this.getMonth()][0]; break
+                case 'LLLL': case 'MMMM': formattedDate += Jate.months[this.getMonth()]; break
+                case 'LLL': case 'MMM': formattedDate += Jate.monthsShort[this.getMonth()]; break
                 case 'LL': case 'MM': formattedDate += this.#formatNumber(this.getMonthNumber()); break
                 case 'L': case 'M':  formattedDate += this.getMonthNumber().toString(); break
                 case 'Lo': case 'Mo': formattedDate += this.#getOrdinalNumber(this.getMonthNumber()); break
@@ -108,10 +107,10 @@ export default class Jate extends Date {
                 case 'DD': formattedDate += this.#formatNumber(this.getDayOfYear(), 2); break
                 case 'Do': formattedDate += this.#getOrdinalNumber(this.getDayOfYear()); break
                 case 'D': formattedDate += this.#formatNumber(this.getDayOfYear(), 1); break
-                case 'EEEEEE': formattedDate += this.days[this.getDay() - 1].substring(0, 2); break
-                case 'EEEEE': formattedDate += this.days[this.getDay() - 1].substring(0, 1); break
-                case 'EEEE': formattedDate += this.days[this.getDay() - 1]; break
-                case 'EEE': case 'EE': case 'E': formattedDate += this.days[this.getDay() - 1].substring(0, 3); break
+                case 'EEEEEE': formattedDate += Jate.days[this.getDay() - 1].substring(0, 2); break
+                case 'EEEEE': formattedDate += Jate.days[this.getDay() - 1].substring(0, 1); break
+                case 'EEEE': formattedDate += Jate.days[this.getDay() - 1]; break
+                case 'EEE': case 'EE': case 'E': formattedDate += Jate.days[this.getDay() - 1].substring(0, 3); break
                 // AM - PM
                 case 'aaaaa': formattedDate += this.#getMeridiem().charAt(0); break
                 case 'aaaa': formattedDate += this.#getMeridiem().split('').join(','); break
@@ -143,6 +142,15 @@ export default class Jate extends Date {
         }
 
         return formattedDate
+    }
+
+    add(amount: number, type: string) {
+        const now = this.getTime()
+        switch(type.toLocaleLowerCase()) {
+            case 'd': case 'day': case 'days': this.setTime(now + amount * 24 * 60 * 60 * 1000); break
+            case 'minute': case 'minutes': case 'min': case 'mins': this.setTime(now + amount * 60 * 1000); break
+
+        }
     }
 
     #getNextMonthNumber() {
@@ -193,3 +201,9 @@ export default class Jate extends Date {
     }
 
 }
+
+
+const myDate = new Jate()
+console.log(myDate.format('yyyy-MM-dd'))
+myDate.add(100, 'days')
+console.log(myDate.format('yyyy-MM-dd'))
