@@ -14,6 +14,7 @@ export default class Jate extends Date {
     nformat(name: string): string;
     format(formatter?: string): string;
     add(amount: number, type: string): void;
+    subtract(amount: number, type: string): void;
     getMonthNumber(): number;
     getQuarter(): number;
 }

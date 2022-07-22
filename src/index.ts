@@ -144,15 +144,23 @@ export default class Jate extends Date {
         return formattedDate
     }
 
-    add(amount: number, type: string) {
+    #increment(amount: number, type: string, factor: number = 1) {
         const now = this.getTime()
         switch(type.toLowerCase()) {
-            case 'd': case 'day': case 'days': this.setTime(now + amount * 24 * 60 * 60 * 1000); break
-            case 'minute': case 'minutes': case 'min': case 'mins': this.setTime(now + amount * 60 * 1000); break
-            case 'h': case 'hours': case 'hour': this.setTime(now + amount * 60 * 60 * 1000); break
-            case 's': case 'second': case 'seconds': this.setTime(now + amount * 1000); break;
-            case 'ms': case 'milliseconds': case 'millisecond': this.setTime(now + amount); break
+            case 'd': case 'day': case 'days': this.setTime(now + factor * (amount * 24 * 60 * 60 * 1000)); break
+            case 'minute': case 'minutes': case 'min': case 'mins': this.setTime(now + factor * (amount * 60 * 1000)); break
+            case 'h': case 'hours': case 'hour': this.setTime(now + factor * (amount * 60 * 60 * 1000)); break
+            case 's': case 'second': case 'seconds': this.setTime(now + factor * (amount * 1000)); break;
+            case 'ms': case 'milliseconds': case 'millisecond': this.setTime(now + factor * (amount)); break
         }
+    }
+
+    add(amount: number, type: string) {
+        this.#increment(amount, type)
+    }
+
+    subtract(amount: number, type: string) {
+        this.#increment(amount, type, -1)
     }
 
     #getNextMonthNumber() {
