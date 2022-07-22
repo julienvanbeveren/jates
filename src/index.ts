@@ -146,10 +146,12 @@ export default class Jate extends Date {
 
     add(amount: number, type: string) {
         const now = this.getTime()
-        switch(type.toLocaleLowerCase()) {
+        switch(type.toLowerCase()) {
             case 'd': case 'day': case 'days': this.setTime(now + amount * 24 * 60 * 60 * 1000); break
             case 'minute': case 'minutes': case 'min': case 'mins': this.setTime(now + amount * 60 * 1000); break
-
+            case 'h': case 'hours': case 'hour': this.setTime(now + amount * 60 * 60 * 1000); break
+            case 's': case 'second': case 'seconds': this.setTime(now + amount * 1000); break;
+            case 'ms': case 'milliseconds': case 'millisecond': this.setTime(now + amount); break
         }
     }
 
@@ -201,9 +203,3 @@ export default class Jate extends Date {
     }
 
 }
-
-
-const myDate = new Jate()
-console.log(myDate.format('yyyy-MM-dd'))
-myDate.add(100, 'days')
-console.log(myDate.format('yyyy-MM-dd'))
