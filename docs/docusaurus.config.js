@@ -77,17 +77,17 @@ const config = {
       },
       footer: {
         style: "dark",
-        links: [
-          {
-            title: "Docs",
-            items: [
-              {
-                label: "Tutorial",
-                to: "/docs/intro",
-              },
-            ],
-          },
-        ],
+        // links: [
+        //   {
+        //     title: "Docs",
+        //     items: [
+        //       {
+        //         label: "Tutorial",
+        //         to: "/docs/intro",
+        //       },
+        //     ],
+        //   },
+        // ],
         copyright: `Copyright © ${new Date().getFullYear()} Jates. Built with Docusaurus.`,
       },
       prism: {

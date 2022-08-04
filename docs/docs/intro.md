@@ -68,10 +68,10 @@ In the code below I use curly brackets {} to tell the formatter that the text sh
 Fortunately you only need to do this with letters, all other symbols are seperated by the formatter.
 
 ```js
-jate.format("{Day:} d {Month:} MM {Year:} YYYY");
+jate.format("{Day}: d {Month}: MM {Year}: YYYY");
 ```
 
-This means that it will return `Day: 4 Month: 08 {Year:} 2022`
+This means that it will return `Day: 4 Month: 08 Year: 2022`
 
 With the curly brackets you can also put the strings to format next to each other. Here, for example, the formatter will seperate `DD` and `MM` and format them correctly.
 
