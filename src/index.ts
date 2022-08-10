@@ -177,16 +177,18 @@ export default class Jate extends Date {
     }
 
     #getOrdinalNumber(number: number) {
-        const ordinals = ['st', 'nd', 'rd', 'th']
-        if (parseInt(number.toString().slice(-1)) == 1) { return number.toString() + 'st' }
-        if (parseInt(number.toString().slice(-1)) == 2) { return number.toString() + 'nd' }
-        if (parseInt(number.toString().slice(-1)) == 3) { return number.toString() + 'rd' }
-        if (parseInt(number.toString().slice(-1)) == 4) { return number.toString() + 'th' }
-        if (parseInt(number.toString().slice(-1)) == 5) { return number.toString() + 'th' }
-        if (parseInt(number.toString().slice(-1)) == 6) { return number.toString() + 'st' }
-        if (parseInt(number.toString().slice(-1)) > 6 && parseInt(number.toString().slice(-1)) < 10) { return number.toString() + 'th' }
-        if (number > 10 && number < 20) { return number.toString() + 'th' }
-        if (number % 10 == 0) { return number.toString() + 'th' }
+        const j = number % 10,
+        k = number % 100
+        if (j == 1 && k != 11) {
+            return number + "st"
+        }
+        if (j == 2 && k != 12) {
+            return number + "nd"
+        }
+        if (j == 3 && k != 13) {
+            return number + "rd"
+        }
+        return number + "th"
     }
 
     getQuarter() {
