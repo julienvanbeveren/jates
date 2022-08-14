@@ -155,12 +155,14 @@ export default class Jate extends Date {
         }
     }
 
-    add(amount: number, type: string) {
+    add(amount: number, type: string): Jate {
         this.#increment(amount, type)
+        return this
     }
 
-    subtract(amount: number, type: string) {
+    subtract(amount: number, type: string): Jate {
         this.#increment(amount, type, -1)
+        return this
     }
 
     #getNextMonthNumber() {

@@ -13,8 +13,8 @@ export default class Jate extends Date {
     getDayOfYear(): number;
     nformat(name: string): string;
     format(formatter?: string): string;
-    add(amount: number, type: string): void;
-    subtract(amount: number, type: string): void;
+    add(amount: number, type: string): Jate;
+    subtract(amount: number, type: string): Jate;
     getMonthNumber(): number;
     getQuarter(): number;
 }
