@@ -113,7 +113,7 @@ export default class Jate extends Date {
                 case 'EEE': case 'EE': case 'E': formattedDate += Jate.days[this.getDay() - 1].substring(0, 3); break
                 // AM - PM
                 case 'aaaaa': formattedDate += this.#getMeridiem().charAt(0); break
-                case 'aaaa': formattedDate += this.#getMeridiem().split('').join(','); break
+                case 'aaaa': formattedDate += this.#getMeridiem().split('').join('.') + "."; break
                 case 'aaa': formattedDate += this.#getMeridiem(); break
                 case 'aa': case 'a': formattedDate += this.#getMeridiem().toUpperCase(); break
                 // Hour formatting
