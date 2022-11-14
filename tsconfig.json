@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "es6", "esnext"],
+    "lib": ["es6", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,9 +18,8 @@
     "declaration": true,
     "declarationDir": "./dist",
     "emitDeclarationOnly": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "outDir": "./dist"
   },
-  "include": ["./src/**/*.ts*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./src/**/*.ts*", "./test/**/*.ts"],
+  "exclude": ["node_modules", "dist", "docs"]
 }
