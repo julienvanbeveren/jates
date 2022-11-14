@@ -4,15 +4,11 @@ export default class Jate extends Date {
     static namedFormat: any;
     static setFormat(name: string, format: string): void;
     static removeFormat(name: string): void;
-    private static months;
-    private static monthsShort;
-    private static days;
-    private static daysShort;
     getMonthName(type?: 'long' | 'short'): string;
     getDayName(type?: 'long' | 'short'): string;
     getDayOfYear(): number;
     nformat(name: string): string;
-    format(formatter?: string): string;
+    format(string?: string): string;
     add(amount: number, type: string): Jate;
     subtract(amount: number, type: string): Jate;
     getMonthNumber(): number;
