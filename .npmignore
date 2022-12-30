@@ -1,0 +1,9 @@
+/test
+/src
+/node_modules
+/docs
+/.github
+.prettierignore
+.prettierrc
+jest.config.test
+rollup.config.js
