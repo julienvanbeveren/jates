@@ -1,9 +1,10 @@
-/test
+/tests
 /src
 /node_modules
 /docs
 /.github
 .prettierignore
 .prettierrc
-jest.config.test
+jest.config.ts
 rollup.config.js
+tsconfig.json
