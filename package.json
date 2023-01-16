@@ -1,6 +1,6 @@
 {
   "name": "jates",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "A modern date library for Javascript",
   "main": "dist/index.js",
   "module": "dist/index.es.js",

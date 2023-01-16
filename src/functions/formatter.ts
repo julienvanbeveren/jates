@@ -1,6 +1,7 @@
 import Jate from '..'
 import { formatNumber, getHour, getMeridiem, getOrdinalNumber } from '../utils'
 import { DAYS, MONTHS, MONTHS_SHORT } from '../utils/consts'
+import { formatEnforcedNumber } from '../utils/formatNumber'
 
 export function formatter(jate: Jate, string: string) {
   let tokens = []
@@ -54,7 +55,7 @@ export function formatter(jate: Jate, string: string) {
         formattedDate += formatNumber(jate.getFullYear(), 3)
         break
       case 'yy':
-        formattedDate += formatNumber(jate.getFullYear(), 2)
+        formattedDate += formatEnforcedNumber(jate.getFullYear(), 2)
         break
       case 'yo':
         formattedDate += getOrdinalNumber(jate.getFullYear())
