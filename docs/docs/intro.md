@@ -59,7 +59,7 @@ For example:
 
 ```js
 const jate = new Jate();
-jate.format("DD/MM/YYYY");
+jate.format("DD/MM/yyyy");
 ```
 
 The output here will be 4/08/2022 at the time of writing.
@@ -68,7 +68,7 @@ In the code below I use curly brackets {} to tell the formatter that the text sh
 Fortunately you only need to do this with letters, all other symbols are seperated by the formatter.
 
 ```js
-jate.format("{Day}: d {Month}: MM {Year}: YYYY");
+jate.format("{Day}: d {Month}: MM {Year}: yyyy");
 ```
 
 This means that it will return `Day: 4 Month: 08 Year: 2022`
