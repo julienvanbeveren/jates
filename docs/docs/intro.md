@@ -59,7 +59,7 @@ For example:
 
 ```js
 const jate = new Jate();
-jate.format("DD/MM/yyyy");
+jate.format("dd/MM/yyyy");
 ```
 
 The output here will be 4/08/2022 at the time of writing.
